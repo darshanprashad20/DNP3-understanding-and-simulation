@@ -62,10 +62,5 @@ polls can also be classified as:
 static data poll: polls for all event data from slaves buffer..... AKA integrity polll
 event poll: polling to slaves for data on a class-by-class basis..... from class 0 to 3
 
-
-
-DNP3 (Distributed Network Protocol version 3) is a communication protocol primarily used in SCADA (Supervisory Control and Data Acquisition) systems for reliable and secure data transmission between control systems and remote devices.
-It is widely used in industries like power utilities, water treatment, and transportation systems.
-
-
+Security: More secure with DNP3-SA (Secure Authentication).
 
