@@ -1,1 +1,71 @@
+***Modbus
+Modbus is a polling protocol. Master interrogates its slaves. Master can poll slave point by point or it can poll by the range of data point. 
+Slave cannot initate communication to master device. The master request the data then only the slave can initate the communication.
+
+Type: Simple Master-Slave protocol.
+Architecture: The master (SCADA server) requests data, and the slave (field device) responds.
+Communication: Polling-based (master constantly queries the slave for data).
+
+Modbus:
+
+    Data is handled using simple register and coil addresses:
+        Discrete Inputs: Read-only boolean values.
+        Coils: Read/Write boolean values.
+        Input Registers: Read-only numerical values.
+        Holding Registers: Read/Write numerical values.
+    No concept of event-driven data or time-stamped data.
+
+Commonly used on serial (RS-232/RS-485) and TCP/IP networks.
+Simple data exchange, best suited for small networks
+
+Modbus:
+
+    No built-in security features (data transmitted as plaintext).
+    Vulnerable to replay attacks and unauthorized access.
+
+
+___________________________________________________________________________________________________________________
+***DNP3
+similarly, master can poll slaves. slaves can initiate communication to master devices.
+this is called Unsolicited messaging: sending data to master without master polling the slaves.
+allows slaves devices to send event to the master.
+
+Advanced Master-Slave with event-driven capability.
+Architecture: Master polls the slave but also allows unsolicited reporting where the slave can send critical data without being polled.
+Communication: Both polling and event-driven communication supported.
+
+Data is categorized into classes and objects:
+
+    Class 0: Static data (current values).
+    Class 1-3: Event-driven data with different priorities.
+
+Supports time-stamped data, useful for historical analysis and fault recording.
+
+Designed for use over serial, Ethernet, and wireless networks.
+Better suited for larger, geographically distributed networks with noisy environments.
+
+DNP3:
+
+    Secure Authentication (DNP3-SA) available for encryption and data integrity.
+    More secure compared to Modbus but not as modern as protocols like IEC 61850.
+
+
+DNP3 poll categories:
+class 0
+class 1 
+class 2 
+class 3
+
+Slave responds with the Master-specified data "class" category
+
+polls can also be classified as:
+static data poll: polls for all event data from slaves buffer..... AKA integrity polll
+event poll: polling to slaves for data on a class-by-class basis..... from class 0 to 3
+
+
+
+DNP3 (Distributed Network Protocol version 3) is a communication protocol primarily used in SCADA (Supervisory Control and Data Acquisition) systems for reliable and secure data transmission between control systems and remote devices.
+It is widely used in industries like power utilities, water treatment, and transportation systems.
+
+
 
