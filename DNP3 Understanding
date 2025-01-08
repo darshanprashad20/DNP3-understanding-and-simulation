@@ -113,3 +113,21 @@ The 4 Classes in DNP3:
     Event Management: Helps monitor faults and abnormal conditions separately from live data.
 
     Efficient Polling: The master can poll only the required class instead of all data points.
+
+
+✅ How Data is Stored in a DNP3 Server (Outstation):
+
+The Outstation (DNP3 Server) stores data in a structured data model with point indices. Each data point belongs to a data object and is categorized into classes based on its priority and importance.
+📦 Storage Structure in the Outstation:
+
+    Point Index: Each data point has a unique index for identification.
+    Data Object Type: Defines the data type (e.g., Binary Input, Analog Input).
+    Class Assignment: Data is categorized into Class 0, 1, 2, or 3 for event handling and polling.
+
+Example of Stored Data:
+Point     Index	Data Type	    Value	    Class         Assigned	Description
+0	    Binary Input	        ON	        Class 1	        Breaker Status (Critical)
+1	    Analog Input	        230V	    Class 0	        Voltage (Live Value)
+2	    Counter	                100 kWh	    Class 3	        Daily Energy Consumption
+3	    Binary Input Event	    OFF	        Class 1	        Breaker Tripped Event
+
