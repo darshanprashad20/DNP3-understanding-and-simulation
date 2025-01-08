@@ -25,7 +25,7 @@ Modbus:
 
 
 ___________________________________________________________________________________________________________________
-***DNP3
+***DNP3 (DISTRIBUTED NETWORK PROTOCOL)
 similarly, master can poll slaves. slaves can initiate communication to master devices.
 this is called Unsolicited messaging: sending data to master without master polling the slaves.
 allows slaves devices to send event to the master.
@@ -62,5 +62,54 @@ polls can also be classified as:
 static data poll: polls for all event data from slaves buffer..... AKA integrity polll
 event poll: polling to slaves for data on a class-by-class basis..... from class 0 to 3
 
-Security: More secure with DNP3-SA (Secure Authentication).
+Security: More secure with DNP3-SA (Secure Authentication).|
 
+
+***********************DNP3 vs IEC-104***********************************
+
+DNP3 and IEC-104 are specifically developed for SCADA, both can be used in applications where there is a need to communicate outside the substations, such as connecting substation devices by controlling a circuit breaker through a Remote control in a network Control centre.
+DNP3, however, has data priority classes (Class 1,2,3) which allows the SCADA master to poll at different frequencies, this makes it more superior to IEC-104 where polling is done at the same frequency. 
+In the case of limited bandwidth, this can pose a problem. In the communication process, DNP3 sends a small number of large sized data packets, whereas IEC-104 sends a large number of small sized data packets,
+hence where large volumes of data are sent through large distances DNP3 is more favoured among the two. Additionally, DNP3 operates in higher baud rates (number of data bits transmitted in one second) when compared to any IEC standard which gives more faster data transmission through the network.
+DNP3 is favoured when compared to IEC-104, although these limitations are unlikely to be reached in a particular project, since choosing the best of the protocols ensures that if needed the system developed will have good potential for scaleability.
+
+
+CLASSES and USE
+In DNP3 (Distributed Network Protocol), classes are used to organize and prioritize data for efficient communication between a Master (SCADA) and an Outstation (Field Device). 
+They help determine how often and when data should be sent from the outstation to the master.
+
+The 4 Classes in DNP3:
+
+    Class 0 (Static Data) – "Current Values"
+        Represents current or real-time values of data points.
+        Example: Current voltage, breaker status, or temperature.
+        Sent when the master requests "Class 0 Poll".
+        📊 Use Case: Continuous monitoring of live data like voltage or current.
+
+    Class 1 (Critical Events) – "High Priority Events"
+        Stores critical events or alarms requiring immediate attention.
+        Example: Breaker Trip, Overvoltage Alert.
+        Sent immediately when the event occurs (unsolicited response).
+        📊 Use Case: Fault detection like a circuit breaker trip.
+
+    Class 2 (Important Events) – "Medium Priority Events"
+        Stores non-critical but important events.
+        Example: Voltage fluctuations within limit, minor alarms.
+        Sent when polled by the master or when the buffer reaches capacity.
+        📊 Use Case: Logging changes in power factor or efficiency over time.
+
+    Class 3 (Low Priority Events) – "Low Priority Events"
+        Stores non-urgent events with minimal impact.
+        Example: Routine operational data, daily energy consumption updates.
+        Sent less frequently and only when requested by the master.
+        📊 Use Case: Periodic reporting of power consumption trends.
+
+✅ Why Use Classes?
+
+    Prioritization: Ensures critical alarms (Class 1) are sent before routine data (Class 3).
+
+    Bandwidth Management: Reduces network load by sending important data only when needed.
+
+    Event Management: Helps monitor faults and abnormal conditions separately from live data.
+
+    Efficient Polling: The master can poll only the required class instead of all data points.
