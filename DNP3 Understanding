@@ -131,3 +131,6 @@ Point     Index	Data Type	    Value	    Class         Assigned	Description
 2	    Counter	                100 kWh	    Class 3	        Daily Energy Consumption
 3	    Binary Input Event	    OFF	        Class 1	        Breaker Tripped Event
 
+
+in DNP3 over UDP there is no acknowledgement from or server or from the client
+in DNP3 there is a dedicated listening port in which the slave send unsolicited message.
